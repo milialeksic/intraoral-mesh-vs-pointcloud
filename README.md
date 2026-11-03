@@ -8,6 +8,22 @@ Both models share the same EdgeConve architecture, only graph definition differs
 
 *Main results*: mesh connectivity improves k-NN on test mIoU from 0.926 to 0.940, boundary accuracy from 0.774 to 0.798 (3 seeds each), while training is about 3-4x faster with less than half the GPU memory. The mesh model also relies more on local surface shape (~62% of attribution on normals vs. ~51% for DGCNN).
 
+
+## Motivation and research question
+
+Intraoral scanners produce triangle meshes, but many deep learning methods for 3D dental data treat the scans as plain point clouds and ginore how the points are connected. This project asks:
+> **Does using the mesh connectivity of an intraoral scan improve segmentation compared to treating it as a point cloud, and does it change what the models bases its decisions on?**
+
+To answer this in a controlled way, two models are compared that are identical in every respect expect how each vertex's nerightbours are defined:
+- **DGCNN (point cloud): ** neighbours are the k nearest points, recomputed in every layer
+- **Mesh GNN: ** neightbours are the vertices connected by an edge of the scan's triangle mesh
+
+The task is separating teeth from gums, with a focus on the gum line, where clinically relevant measurements such as gingival recessions are taken. The comparison covers:
+1. **Accuracy:** segmentation quality overall and at the tooth-gingiva boundary
+2. **Efficiency: ** training time and GPU memory
+3. **Explainability: ** whether the models rely on poisiton or on local surface shape measured with Inegrated Gradients.
+
+
 ## Background
 
 ### Intraoral scans
@@ -106,10 +122,31 @@ The mesh GNN bases its decisions mainly on **surface shape**, while DGCNN weighs
 The larger completeness errors for the DGCNN region target occur on scans where the model's score on the real input and on the baseline nearly cancel, so a small absolute error becomes a large relative one. The boundary results, which are reliable for both model on evert scan, are therefore used as the main result.
 
 
-## Discussion
-- The graph definision matters: With identical architecture and parameter count, mesh connectivity give better segmentation, mostly at the boundary. Since DGCNN also reaches a higher training loss, the difference is not overfitting, the mesh graph is a more useful structure for this task.
-- Mesh edges follows the surface, so information does not leak between tooth adn gum across narrow gaps, which k-NN neighbourhoods can do.
-- The mesh modle puts more weight on normals, local shape, which is less tied to where a structure happens to lie in the scan and should generalise better to different scanners and jaw poses.
+## Conclusions
+
+**Does mesh connectivity improve segmentation, and does it change what the model relies on?**
+Yes to both. With identical architecture and the same number of parameters, the mesh GNN is more
+accurate, more efficient, and relies more on surface shape than DGCNN.
+
+1. **Accuracy.** The mesh GNN is better on every metric and in every seed: mIoU 0.940 vs. 0.926
+   (+1.4 points, about 7× the standard deviation across seeds) and boundary accuracy 0.798 vs. 0.774
+   (+2.4 points). The largest gain is at the gum line, which fits the idea that mesh edges follow the
+   surface and do not connect tooth and gum across narrow gaps, as k-NN neighbourhoods can. DGCNN
+   also reaches a higher training loss, so the gap is not caused by overfitting: the mesh graph is a
+   more useful structure for this task.
+
+2. **Efficiency.** The mesh GNN trains about 3–4× faster per epoch and needs less than half the GPU
+   memory, because it does not search for nearest neighbours in every layer.
+
+3. **Explainability.** The mesh GNN bases its decisions mainly on local surface shape (≈60% of
+   attribution on normals), while DGCNN weighs position and shape about equally (≈51% on normals).
+   At the gum line, DGCNN relies more on position than the mesh GNN on all 21 analysed test scans.
+   Relying on shape rather than on where a structure lies in the scan is expected to generalise better
+   to other scanners and jaw poses, though this was not tested here.
+
+**In short:** using the scan's mesh connectivity instead of nearest-neighbour point clouds gives a model
+that segments the gum line more accurately, trains faster with less memory, and bases its decisions
+more on the shape of the surface.
 
 ## Limitations
 - One data part, binary task only; 
