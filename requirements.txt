@@ -1,0 +1,11 @@
+# Install torch, torch_geometric and torch_cluster for your CUDA version first (see README)
+# torch>=2.1
+torch_geometric>=2.5
+torch_cluster
+numpy
+scipy
+trimesh
+open3d
+matplotlib
+tqdm
+pytest

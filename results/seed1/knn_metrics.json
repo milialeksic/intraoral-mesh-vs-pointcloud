@@ -1,0 +1,45 @@
+{
+  "graph": "knn",
+  "best_epoch": 37,
+  "val": {
+    "iou_gingiva": 0.9390940266368929,
+    "iou_tooth": 0.9338117400310271,
+    "miou": 0.93645288333396,
+    "acc": 0.9672422963420493,
+    "boundary_acc": 0.7883220359139018
+  },
+  "test": {
+    "iou_gingiva": 0.932780146748108,
+    "iou_tooth": 0.9214469773831222,
+    "miou": 0.9271135620656151,
+    "acc": 0.9624156403173771,
+    "boundary_acc": 0.7750554100342535
+  },
+  "parameters": 344834,
+  "mean_epoch_seconds": 13.181826025247574,
+  "peak_gpu_memory_mb": 2231.04443359375,
+  "scans": {
+    "train": 105,
+    "val": 23,
+    "test": 23
+  },
+  "args": {
+    "graph": "knn",
+    "data": "data\\processed",
+    "out": "runs\\knn_s1",
+    "results_dir": "results\\seed1",
+    "epochs": "40",
+    "batch_size": "2",
+    "lr": "0.001",
+    "weight_decay": "0.0001",
+    "hidden": "64",
+    "layers": "3",
+    "emb": "512",
+    "k": "20",
+    "dropout": "0.5",
+    "knn_chunk": "2048",
+    "no_augment": "False",
+    "seed": "1",
+    "device": "auto"
+  }
+}

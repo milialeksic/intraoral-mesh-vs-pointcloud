@@ -1,0 +1,27 @@
+# Data (Teeth3DS+ must not be redistributed)
+data/
+*.obj
+*.json
+!results/**/*.json
+
+# Processed graphs, checkpoints, outputs
+processed/
+checkpoints/
+*.pt
+*.pth
+*.ply
+runs/
+wandb/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

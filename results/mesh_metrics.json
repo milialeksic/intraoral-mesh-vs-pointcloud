@@ -1,0 +1,45 @@
+{
+  "graph": "mesh",
+  "best_epoch": 38,
+  "val": {
+    "iou_gingiva": 0.9494184408580513,
+    "iou_tooth": 0.9454442852802014,
+    "miou": 0.9474313630691263,
+    "acc": 0.9730457758561526,
+    "boundary_acc": 0.8108772347088437
+  },
+  "test": {
+    "iou_gingiva": 0.9439507860560492,
+    "iou_tooth": 0.9351399937081479,
+    "miou": 0.9395453898820986,
+    "acc": 0.9690011727660525,
+    "boundary_acc": 0.7983074753173484
+  },
+  "parameters": 344834,
+  "mean_epoch_seconds": 4.50784854888916,
+  "peak_gpu_memory_mb": 875.76416015625,
+  "scans": {
+    "train": 105,
+    "val": 23,
+    "test": 23
+  },
+  "args": {
+    "graph": "mesh",
+    "data": "data\\processed",
+    "out": "runs\\mesh",
+    "results_dir": "results",
+    "epochs": "40",
+    "batch_size": "2",
+    "lr": "0.001",
+    "weight_decay": "0.0001",
+    "hidden": "64",
+    "layers": "3",
+    "emb": "512",
+    "k": "20",
+    "dropout": "0.5",
+    "knn_chunk": "2048",
+    "no_augment": "False",
+    "seed": "0",
+    "device": "auto"
+  }
+}
