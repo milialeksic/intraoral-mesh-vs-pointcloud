@@ -79,7 +79,7 @@ Integrated Gradient (IG) measures how much each input feature of each vertex con
 ## Results
 ### Segmentation (test set, mean +- std over 3 seeds)
 | Model |	Graph |	IoU tooth |	IoU gingiva	mIoU |	Acc |	Boundary acc |
-|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|
 |DGCNN |	dynamic k-NN |	0.9198 ± 0.0021 |	0.9314 ± 0.0019 |	0.9256 ± 0.0020	|0.9616 ± 0.0011|	0.7742 ± 0.0029|
 |Mesh GNN|	mesh edges|	0.9354 ± 0.0022|	0.9444 ± 0.0020	|0.9399 ± 0.0021|	0.9692 ± 0.0011	|0.7983 ± 0.0029|
 
