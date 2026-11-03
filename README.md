@@ -47,7 +47,7 @@ h_i'= max_j MLP([h_i, h_j - h_i])
 The term <code> h_j - h_i </code> captures how the surface change around a vertex. Difference is who counts as a neighbour in model.
 
 ||DGCNN|Mesh GNN|
-|-------------|------------|-------------|
+|---|---|---|
 |Neighbours| k = 20 nearest points| vertices sharing a mesh edge |
 |Graph| dynamic: recomputed in every layer, in the current feature space| fixed: taken from the triangles|
 |Strength| can connect similiar regions that are far apart| ifnromation flows only along the surface|
