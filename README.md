@@ -87,7 +87,7 @@ The mesh GNN is better on every metric and in every seed. The gap in mIoU (+1.4 
 
 ### Efficiency
 | Model	 | Parameters |	Time / epoch |	Peak GPU memory |
-|---|---|---|---|---|
+|---|---|---|---|
 |DGCNN	|344,834|	~13 s|	2.2 GB|
 |Mesh GNN|	344,834	|~3–4.5 s|	0.9 GB|
 
